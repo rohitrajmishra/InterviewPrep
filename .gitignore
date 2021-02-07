@@ -1,2 +1,5 @@
 # Executables
 *.out
+
+# jupyter-notebook checkpint files
+.ipynb*
