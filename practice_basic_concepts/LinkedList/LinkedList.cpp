@@ -53,6 +53,35 @@ void printList(Node *head)
   }
 }
 
+Node *insertNode(Node *head, int pos, int data)
+{
+  Node *newNode = new Node(data);
+
+  // Traverse till node before required pos
+  // Handle insert at 0th pos corner case
+  if (pos == 0)
+  {
+    newNode->next = head->next;
+    head = newNode;
+    return head;
+  }
+
+  int count = 0;
+  Node *temp = head;
+  while (temp != NULL && count < pos - 1)
+  {
+    temp = temp->next;
+    count++;
+  }
+
+  if (temp != NULL)
+  {
+    newNode->next = temp->next;
+    temp->next = newNode;
+  }
+
+  return head;
+}
 int main()
 {
   // Node *head = NULL;
@@ -68,6 +97,13 @@ int main()
   // n3->next = n4;
 
   Node *head = takeInput();
+  // printList(head);
+  // cout << "length: " << length(head) << endl;
+  cout << endl;
+  cout << "Enter pos and data for insertion: " << endl;
+  int pos, data;
+  cin >> pos >> data;
+  head = insertNode(head, pos, data);
+
   printList(head);
-  cout << "length: " << length(head) << endl;
 }
