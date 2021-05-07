@@ -82,6 +82,42 @@ Node *insertNode(Node *head, int pos, int data)
 
   return head;
 }
+
+// Delete node
+Node *deleteNode(Node *head, int i)
+{
+  int index_count = 0;
+
+  // Deleting at 0th postion
+  if (i == 0)
+  {
+    Node *to_delete = head;
+    head = head->next;
+
+    delete to_delete;
+
+    return head;
+  }
+
+  Node *temp = head;
+  // Deleting in the middle
+  while (temp->next != NULL && index_count < (i - 1))
+  { //temp->next != NULL , e.g. trying to delete index 4 when LL is till 3
+    index_count++;
+    temp = temp->next;
+  }
+
+  if (temp->next != NULL)
+  {
+    Node *to_delete = temp->next;
+    temp->next = to_delete->next;
+
+    delete to_delete;
+  }
+
+  return head;
+}
+
 int main()
 {
   // Node *head = NULL;
@@ -99,11 +135,21 @@ int main()
   Node *head = takeInput();
   // printList(head);
   // cout << "length: " << length(head) << endl;
-  cout << endl;
-  cout << "Enter pos and data for insertion: " << endl;
-  int pos, data;
-  cin >> pos >> data;
-  head = insertNode(head, pos, data);
 
+  // insertNode test
+  // cout << endl;
+  // cout << "Enter pos and data for insertion: " << endl;
+  // int pos, data;
+  // cin >> pos >> data;
+  // head = insertNode(head, pos, data);
+
+  // printList(head);
+
+  cout << endl;
+  cout << "Enter position index for deletion: " << endl;
+  int pos;
+  cin >> pos;
+
+  head = deleteNode(head, pos);
   printList(head);
 }
