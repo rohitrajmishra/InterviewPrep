@@ -31,6 +31,18 @@ Node *takeInput()
   return head;
 }
 
+int length(Node *head)
+{
+  int len = 0;
+  Node *temp = head;
+  while (temp != NULL)
+  {
+    len++;
+    temp = temp->next;
+  }
+  return len;
+}
+
 void printList(Node *head)
 {
   Node *temp = head;
@@ -57,4 +69,5 @@ int main()
 
   Node *head = takeInput();
   printList(head);
+  cout << "length: " << length(head) << endl;
 }
