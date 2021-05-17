@@ -106,12 +106,36 @@ void printTreeLevelWise(TreeNode<int> *root)
 
 int numNodes(TreeNode<int> *root)
 {
+  // Edge case
+  if (root == NULL)
+  {
+    return;
+  }
   int ans = 1;
   for (int i = 0; i < root->children.size(); i++)
   {
     ans += numNodes(root->children[i]);
   }
   return ans;
+}
+
+void printAtLevelK(TreeNode<int> *root, int k)
+{
+  // Edge case
+  if (root == NULL)
+  {
+    return;
+  }
+
+  if (k == 0)
+  {
+    cout << root->data << endl;
+  }
+
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    printAtLevelK(root->children[i], k - 1);
+  }
 }
 
 int main()
@@ -129,4 +153,7 @@ int main()
   // printTree(root);
   printTreeLevelWise(root);
   cout << "numNodes: " << numNodes(root) << endl;
+
+  cout << "printAtLevelK --> Level 2" << endl;
+  printAtLevelK(root, 2);
 }
