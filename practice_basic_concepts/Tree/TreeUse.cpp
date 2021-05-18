@@ -162,6 +162,38 @@ int numLeafNodes(TreeNode<int> *root)
   return totalLeaf;
 }
 
+void preOrder(TreeNode<int> *root)
+{
+  // Edge case
+  if (root == NULL)
+  {
+    return;
+  }
+
+  cout << root->data << " ";
+
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    preOrder(root->children[i]);
+  }
+}
+
+void postOrder(TreeNode<int> *root)
+{
+  // Edge case
+  if (root == NULL)
+  {
+    return;
+  }
+
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    postOrder(root->children[i]);
+  }
+
+  cout << root->data << " ";
+}
+
 int main()
 {
   // TreeNode<int> *root = new TreeNode<int>(1);
@@ -173,12 +205,22 @@ int main()
   // root->children.push_back(node2);
 
   // 1 3 2 3 4 2 5 6 0 0 0 0
+  // 1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0
   TreeNode<int> *root = takeInputLevelWise();
   // printTree(root);
   printTreeLevelWise(root);
-  cout << "numNodes: " << numNodes(root) << endl;
+  // cout << "numNodes: " << numNodes(root) << endl;
 
+  cout << endl;
   cout << "printAtLevelK --> Level 2" << endl;
   printAtLevelK(root, 2);
-  cout << "numLeafNodes: " << numLeafNodes(root) << endl;
+  // cout << "numLeafNodes: " << numLeafNodes(root) << endl;
+
+  cout << endl;
+  cout << "preOrder traversal: " << endl;
+  preOrder(root);
+
+  cout << endl;
+  cout << "postOrder traversal: " << endl;
+  postOrder(root);
 }
