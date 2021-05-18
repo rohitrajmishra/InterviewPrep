@@ -109,7 +109,7 @@ int numNodes(TreeNode<int> *root)
   // Edge case
   if (root == NULL)
   {
-    return;
+    return 0;
   }
   int ans = 1;
   for (int i = 0; i < root->children.size(); i++)
@@ -138,6 +138,30 @@ void printAtLevelK(TreeNode<int> *root, int k)
   }
 }
 
+int numLeafNodes(TreeNode<int> *root)
+{
+  // Edge case
+  if (root == NULL)
+  {
+    return 0;
+  }
+
+  // If root is leaf node itself
+  if (root->children.size() == 0)
+  {
+    return 1;
+  }
+
+  // Recursive call on children
+  int totalLeaf = 0;
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    totalLeaf += numLeafNodes(root->children[i]);
+  }
+
+  return totalLeaf;
+}
+
 int main()
 {
   // TreeNode<int> *root = new TreeNode<int>(1);
@@ -156,4 +180,5 @@ int main()
 
   cout << "printAtLevelK --> Level 2" << endl;
   printAtLevelK(root, 2);
+  cout << "numLeafNodes: " << numLeafNodes(root) << endl;
 }
