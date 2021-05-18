@@ -194,6 +194,22 @@ void postOrder(TreeNode<int> *root)
   cout << root->data << " ";
 }
 
+void deleteTree(TreeNode<int> *root)
+{
+  // Edge case
+  if (root == NULL)
+  {
+    return;
+  }
+
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    deleteTree(root->children[i]);
+  }
+
+  delete root;
+}
+
 int main()
 {
   // TreeNode<int> *root = new TreeNode<int>(1);
@@ -223,4 +239,10 @@ int main()
   cout << endl;
   cout << "postOrder traversal: " << endl;
   postOrder(root);
+
+  // Delete Tree
+  // Using destructor, first call destructor on children recursively in class
+  delete root;
+  // Using custom function
+  // deleteTree(root);
 }
